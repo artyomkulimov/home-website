@@ -1,0 +1,48 @@
+h1, p {
+    margin: 20px;
+    color: rgb(0, 0, 0);
+    line-height: 1.75em;
+}
+.nav-horizontal {
+    background-color: rgb(255, 255, 255);
+    overflow: hidden;
+    height: 3em;
+    width: 100%;
+}
+.nav-horizontal .mask {
+    height: 5em;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.nav-horizontal .list {
+    display: inline-table;
+    margin: 0 auto;
+    max-width: 100%;
+}
+.nav-horizontal .list li {
+    display: table-cell;
+}
+.nav-horizontal .list a {
+    display: block;
+    padding: 0 1em;
+    text-decoration: none;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    height: 3em;
+    line-height: 3;
+}
+.nav-horizontal .list a:hover {
+    border-bottom: 2px solid rgb(128, 125, 125);
+    background-color: #3b3a3a;
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: sans-serif;
+    /* padding-top: 100px;
+    width: 100vw; */
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+}

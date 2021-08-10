@@ -1,35 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Page</title>
-    <link rel="stylesheet" href="{{url_for('static',filename = 'about.css')}}">
-</head>
-<body>
-    <center>
-        <div>
-        <header>
-        <big>
-            <h1>Welcome to my website</h1>
-        </big>
-        </header>
-    </div>
+
+<big>
+<header>
+<h1>Welcome to my website</h1>
+</header>
+</big>
+{% extends "layout.html" %}
+{% block content %}
+    <big>
 
     <h6></h6>
-    <big>
-        <h2>Navigation Links</h2>
-        <a href="/home">this is the homepage</a></li>
-        <br>
-        <a href="/credits">this is who created me</a></li>
-        <br>
-        <a href="/form">this page has a registration form</a></li>
-        <br>
-        <a href="/updates">this page documents the updates of my github</a></li>
+        <h2>Navigation Menu</h2>
+        <div>
+            <a href="/home">Home</a>
+            <a href="/credits">Credits</a>
+            <a href="/form">Form</a>
+            <a href="/updates">Updates</a>
+        </div>
     </ul>
     <hr>
-    <img src="images/bitcoin.png" alt="image failed to load :(">
-    </center>
-</body>
-</html>
+    <img src="static/bitcoin.png" alt="image failed to load :(">
+    </big>
+{% endblock %}
