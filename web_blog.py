@@ -7,15 +7,23 @@ app = Flask(__name__)
 @app.route("/home")
 @app.route("/")
 def home():
-    return "<h1> default homepage</h1>"
-
-@app.route("/about")
-def about():
     return render_template("about.html")
+
+# @app.route("/about")
+# def about():
+    
 
 @app.route("/credits")
 def credits():
     return render_template("credits.html")
 
-if __name__ == "__main__":    
-    app.run(debug=True) 
+@app.route("/form")
+def form():
+    return render_template("form.html")
+
+@app.route("/updates")
+def updates():
+    return render_template("updates.html")
+
+if __name__ == "__main__": 
+    app.run(debug=True)
