@@ -8,7 +8,7 @@ app.config["SECRET_KEY"] = os.environ['flask_secret_key']
 @app.route("/home")
 @app.route("/")
 def home():
-    return render_template("about.html")
+    return render_template("home.html")
 
 @app.route("/credits")
 def credits():

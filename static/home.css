@@ -1,8 +1,4 @@
-h3{
-    margin: auto;
-    border-left: 10px gray;
-}
-.up-1{
+body{
     font: normal, 20px, Verdana, Geneva, Tahoma, sans-serif;
     margin: auto;
     width: 60%;
@@ -10,8 +6,5 @@ h3{
     border-left: 20px gray solid;
     border-top: 20px gray solid; 
     border-bottom: 20px gray solid;
-}
-.date{
-    margin-left: 20px;
-    color: rgb(76, 176, 209);
+    text-align: center;
 }

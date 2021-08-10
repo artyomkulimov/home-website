@@ -1,13 +1,9 @@
-
-<big>
 <header>
-<h1>Welcome to my website</h1>
+<h1>Website Blog</h1>
 </header>
-</big>
 {% extends "layout.html" %}
 {% block content %}
-    <big>
-
+    <link rel="stylesheet" href="{{url_for('static',filename = 'home.css')}}">
     <h6></h6>
         <h2>Navigation Menu</h2>
         <div>
@@ -19,5 +15,4 @@
     </ul>
     <hr>
     <img src="static/bitcoin.png" alt="image failed to load :(">
-    </big>
 {% endblock %}

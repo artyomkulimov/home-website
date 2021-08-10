@@ -3,11 +3,8 @@ h1,h3, p {
     color: rgb(26, 26, 26);
     line-height: 1.75em;
 }
-body{
-    font: normal, 20px, Verdana, Geneva, Tahoma, sans-serif;
-}
-
 .nav-horizontal {
+    text-align: center;
     background-color: gray;
     overflow: hidden;
     height: 3em;
@@ -49,6 +46,6 @@ body {
     font-family: sans-serif;
     /* padding-top: 100px;
     width: 100vw; */
-    text-align: center;
+    font: normal, 20px, Verdana, Geneva, Tahoma, sans-serif;
     background-color: rgb(255, 255, 255);
 }
