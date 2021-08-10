@@ -1,0 +1,11 @@
+h3{
+    border-left: 10px gray;
+}
+.up-1{
+    margin: auto;
+    width: 60%;
+    border-right: 20px gray solid;
+    border-left: 20px gray solid;
+    border-top: 20px gray solid; 
+    border-bottom: 10px gray solid;
+}

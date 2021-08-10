@@ -1,15 +1,20 @@
-h1, p {
+h1,h3, p {
     margin: 20px;
-    color: rgb(0, 0, 0);
+    color: rgb(26, 26, 26);
     line-height: 1.75em;
 }
+body{
+    font: normal, 20px, Verdana, Geneva, Tahoma, sans-serif;
+}
+
 .nav-horizontal {
-    background-color: rgb(255, 255, 255);
+    background-color: gray;
     overflow: hidden;
     height: 3em;
     width: 100%;
 }
 .nav-horizontal .mask {
+    background-color: rgb(255, 255, 255);
     height: 5em;
     width: 100%;
     overflow-x: auto;
@@ -22,19 +27,20 @@ h1, p {
 }
 .nav-horizontal .list li {
     display: table-cell;
+    margin: auto;
 }
 .nav-horizontal .list a {
     display: block;
     padding: 0 1em;
     text-decoration: none;
-    background-color: rgb(0, 0, 0);
+    background-color: gray;
     color: rgb(255, 255, 255);
     height: 3em;
     line-height: 3;
 }
 .nav-horizontal .list a:hover {
-    border-bottom: 2px solid rgb(128, 125, 125);
-    background-color: #3b3a3a;
+    border-bottom: 2px solid rgb(175, 175, 175);
+    background-color: rgb(41, 41, 41);
 }
 * {
     box-sizing: border-box;
