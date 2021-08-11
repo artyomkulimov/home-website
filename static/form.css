@@ -1,5 +1,5 @@
 .form{
-    text-align: center;
+
     font: normal, 20px, Verdana, Geneva, Tahoma, sans-serif;
     margin: auto;
     width: 60%;
@@ -7,4 +7,28 @@
     border-left: 20px gray solid;
     border-top: 20px gray solid; 
     border-bottom: 20px gray solid;
+}
+.form{
+    padding: 20px;
+    padding-left: 2px;
+}
+.form label{
+    display: block;
+}
+.boxthing{
+    padding:20px;
+    padding-left: 0px;
+}
+.form input{
+    width: 100%;
+}
+.form button{
+    background-color: rgb(75, 75, 75);
+    color:rgb(255, 255, 255);
+    text-align: center;
+    width: 100%;
+    padding-right: 10px;
+}
+.bday{
+    padding-bottom: 20px;
 }

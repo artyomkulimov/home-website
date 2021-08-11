@@ -1,17 +1,13 @@
-h3{
-    margin: auto;
-    border-left: 10px gray;
-}
+
 .up-1{
     font: normal, 20px, Verdana, Geneva, Tahoma, sans-serif;
-    margin: auto;
+    margin:auto;
     width: 60%;
-    border-right: 20px gray solid;
-    border-left: 20px gray solid;
-    border-top: 20px gray solid; 
-    border-bottom: 20px gray solid;
+    border:20px gray solid;
+    font-weight: 400;
 }
 .date{
     margin-left: 20px;
-    color: rgb(76, 176, 209);
+    color: rgb(0, 149, 199);
+    font-weight: 300;
 }
