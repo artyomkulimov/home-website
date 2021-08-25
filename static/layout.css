@@ -16,6 +16,7 @@ h1,h3, p {
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    border-bottom: 20px;
 }
 .nav-horizontal .list {
     display: inline-table;
@@ -42,10 +43,21 @@ h1,h3, p {
 * {
     box-sizing: border-box;
 }
-body {
-    font-family: sans-serif;
-    /* padding-top: 100px;
-    width: 100vw; */
+body{
     font: normal, 20px, Verdana, Geneva, Tahoma, sans-serif;
+    margin: auto;
+    width: 60%;
+    border-right: 20px gray solid;
+    border-left: 20px gray solid;
+    border-top: 20px gray solid; 
+    border-bottom: 20px gray solid;
+    text-align: center;
+    font-family: sans-serif;
     background-color: rgb(255, 255, 255);
+}
+.success{
+    color: green;
+}
+.inv-cred{
+    color: red;
 }

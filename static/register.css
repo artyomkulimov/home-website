@@ -1,0 +1,29 @@
+form {
+    font: normal, 20px, Verdana, Geneva, Tahoma, sans-serif;
+    margin:auto;
+    width: 60%;
+    border:20px gray solid;
+    font-weight: 400;
+    padding: 20px;
+    padding-left: 2px;
+}
+label{
+    color: rgb(0, 0, 0);
+    font-weight: 300;
+}
+.submit{
+    background-color: rgb(75, 75, 75);
+    color:rgb(255, 255, 255);
+    text-align: center;
+    width: 100%;
+    padding-right: 10px;
+}
+
+.input {
+    width: 100%;
+    text-align: right;
+}
+div{
+    padding:20px;
+    padding-left: 0px;
+}

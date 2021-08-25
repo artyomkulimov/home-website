@@ -12,16 +12,27 @@
     {% endif %}
 </head>
 <body>
+    {% if header %}
+        <header>{{header}}</header>
+    {% endif %}
     <nav class="nav-horizontal">
         <div class="mask">
           <ul class="list">
             <li><a href="/home">Home</a></li>
             <li><a href="/credits">Credits</a></li>
-            <li><a href="/form">Form</a></li>
             <li><a href="/updates">Updates</a></li>
+            <li><a href="/register">Register</a></li>
+            <li><a href="/login">Login</a></li>
           </ul>
         </div>
     </nav>
+    {% with messages = get_flashed_messages(with_categories = true) %}
+        {% if messages %}
+            {% for category,message in messages %}
+                <div class = {{category}}>{{message}}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     {% block content %}
     {% endblock %}
 </body>

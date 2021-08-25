@@ -1,23 +1,16 @@
 <link rel="stylesheet" href="{{url_for('static',filename = 'register.css')}}">
 {% extends "layout.html" %}
 {% block content %}
+
     <form method="POST" action="">
         {{ form.csrf_token }}
         <p>
-            {{form.username.label(class = "label")}}
+            {{form.username.label(class = "label")}} <br>
             {{form.username(class="input")}}
         </p>
         <p>
-            {{form.email.label(class = "label")}}
-            {{form.email(class="input")}}
-        </p>
-        <p>
-            {{form.password.label(class = "label")}}
+            {{form.password.label(class = "label")}}<br>
             {{form.password(class="input")}}
-        </p>
-        <p>
-            {{form.confirm_password.label(class = "label")}}
-            {{form.confirm_password(class="input")}}
         </p>
         <p>
             {{form.submit(class="submit")}}
