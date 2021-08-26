@@ -1,8 +1,8 @@
-
+<link rel="stylesheet" href="{{url_for('static',filename = 'register.css')}}">
 {% extends "layout.html" %}
 {% block content %}
 
-    <form method="POST" action="">
+    <form class = "container" method="POST" action="">
         {{ form.csrf_token }}
         <p>
             {{form.username.label(class = "label")}} <br>
