@@ -18,7 +18,7 @@ class User(db.Model):
 @app.route("/home")
 @app.route("/")
 def home():
-    return render_template("home.html",title = "Home",Header = "Website Blog")
+    return render_template("home.html",title = "Home",Header = "<h1>Website Blog</h1>")
 
 @app.route("/credits")
 def credits():

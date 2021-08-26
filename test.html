@@ -1,39 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
 <body>
-    <form action=" ">
-        <p>
-            <label>
-                Input your Username
-                <input type="text"> 
-            </label>
-
-        </p>
-
-        <p>
-            <label>
-                Input your Email
-                <input type="email">
-            </label>
-        </p>
-
-        <p>
-            <label>
-                Input your password
-                <input type="password">
-            </label>
-        </p>
-
-        <p>
-            <input type="submit">
-        </p>
+    
+    <nav class="nav-horizontal">
+        <div class="mask">
+          <ul class="list">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/credits">Credits</a></li>
+            <li><a href="/updates">Updates</a></li>
+            <li><a href="/register">Register</a></li>
+            <li><a href="/login">Login</a></li>
+          </ul>
+        </div>
+    </nav>
+    
         
+    
+    
+
+    <form class = "container" method="POST" action="">
+        <input id="csrf_token" name="csrf_token" type="hidden" value="IjNhMGFmMTM4N2I5YWZhNzcyNDEyMjUxYzI4Mzg2YzRmOGFhNzNjYzYi.YScwJA.T34agdy16Dj6OfrnTYMMqcmzSmQ">
+        <p>
+            <label class="label" for="username">Username:</label> <br>
+            <input class="input" id="username" name="username" required="" type="text" value="">
+        </p>
+        <p>
+            <label class="label" for="password">Password:</label><br>
+            <input class="input" id="password" name="password" required="" type="password" value="">
+        </p>
+        <p>
+            <input class="submit" id="submit" name="submit" type="submit" value="Register">
+        </p>
     </form>
+
+
 </body>
-</html>

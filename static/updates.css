@@ -1,12 +1,28 @@
-.up-1{
-    font: normal, 20px, Verdana, Geneva, Tahoma, sans-serif;
-    margin:auto;
-    width: 60%;
-    border:20px gray solid;
-    font-weight: 400;
+.container {
+    display: grid;
+    grid-template: 1fr 1fr 1fr/ 1fr 2fr ;
+    grid-gap: 3px;
+    text-align: left;
+    padding-right: 30px;
+    padding-left: 30px;
+    }
+.container > div{
+    padding-left: 20px;
+    padding-right: 30px;
+    display: flex;
+    font-size: 2em;
+    color: #ffeead; 
+    background-color: #ffeead;
 }
 .date{
+    text-align: bottom;
     margin-left: 20px;
-    color: rgb(0, 149, 199);
+    color: black;
+    font-size: 1em;
     font-weight: 300;
+}
+body {
+    background-color: #ffeead;
+    margin: 10px;
+    zoom: 40%;
 }
