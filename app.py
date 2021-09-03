@@ -1,12 +1,17 @@
-from flask import Flask,render_template,url_for,redirect,flash, jsonify
+from flask import Flask,render_template,url_for,redirect,flash, jsonify, request
 from flask_bcrypt import Bcrypt
 from flask_login import login_manager, login_user, current_user, logout_user, LoginManager, UserMixin
 from flask_login.mixins import UserMixin
+from flask_login.utils import login_required
 from wtforms.validators import Email
 from forms import RegistrationForm,LoginForm
 import os
+from werkzeug.utils import secure_filename
+from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileRequired
 from werkzeug.datastructures import Headers
 from flask_sqlalchemy import SQLAlchemy, model
+
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = 'FLASK_SECRET_KEY'
@@ -17,9 +22,11 @@ login_manager = LoginManager(app)
 
 class User(db.Model,UserMixin):
     id = db.Column(db.Integer,primary_key = True)
-    username = db.Column(db.String(20),nullable = False)
-    email = db.Column(db.String(30),nullable = False)
-    password = db.Column(db.String(20),nullable = False)
+    username = db.Column(db.String(20),nullable = True)
+    email = db.Column(db.String(30),nullable = True)
+    password = db.Column(db.String(20),nullable = True)
+    pfp = db.Column(db.String(100),nullable = False)
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -46,7 +53,14 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         hash_password = bcrypt.generate_password_hash(form.password.data).decode("UTF-8")
-        user = User(username = form.username.data,email = form.email.data, password = hash_password)
+        # filename = form.file.name
+        # print(filename)
+        # form.file.data.save('\profile_pictures'+ filename)
+        # filename = secure_filename(form.file.data.filename)
+        # form.file.data.save('uploads/' + filename)
+        file = request.files['file']
+        file.save(secure_filename(file.filename))
+        user = User(username = form.username.data,email = form.email.data, password = hash_password,pfp = file)
         db.session.add(user)
         db.session.commit()
         flash(f"Account was created for user {form.username.data}","success") 
@@ -65,13 +79,41 @@ def login():
         else:
             flash(f"Either username or password incorrect","inv-cred")
     return render_template("login.html",form = form,title = "Login",Header = "This is the Login page")
-#################################
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for("home"))
+
+@app.route("/account")
+@login_required
+def account():
+    if request.method == 'POST':
+        file = request.files['file']
+        file.save(secure_filename(file.filename))
+        return 'file uploaded successfully'
+    return render_template("modify_account.html")
+    
+
+@app.route('/upload')
+@login_required
+def file_upload():
+   return render_template('upload.html')
+	
+@app.route('/uploader', methods = ['GET', 'POST'])
+@login_required
+def download_file():
+    if request.method == 'POST':
+        file = request.files['file']
+        file.save(secure_filename(file.filename))
+        user = User(pfp = file.filename)
+        db.session.add(user)
+        db.session.commit()
+        return render_template("account.html")
+    
 
 
 
 
-
-
-
-if __name__ == "__main__": 
+if __name__ == "__main__":
     app.run(debug=True)

@@ -1,26 +1,31 @@
 <!-- <link rel="stylesheet" href="{{url_for('static',filename = 'register.css')}}"> -->
+
 {% extends "layout.html" %}
 {% block content %}
     <form class = "container" method="POST" action="">
         {{ form.csrf_token }}
         <p>
-            {{form.username.label(class = "label")}}
-            {{form.username(class="input")}}
+            {{ form.username.label(class = "label") }}
+            {{ form.username(class="input") }}
         </p>
         <p>
-            {{form.email.label(class = "label")}}
-            {{form.email(class="input")}}
+            {{ form.email.label(class = "label") }}
+            {{ form.email(class="input") }}
         </p>
         <p>
-            {{form.password.label(class = "label")}}
-            {{form.password(class="input")}}
+            {{ form.password.label(class = "label") }}
+            {{ form.password(class="input") }}
         </p>
         <p>
-            {{form.confirm_password.label(class = "label")}}
-            {{form.confirm_password(class="input")}}
+            {{ form.confirm_password.label(class = "label") }}
+            {{ form.confirm_password(class="input") }}
         </p>
         <p>
-            {{form.submit(class="submit")}}
+            {{ form.file.label(class = "label") }}
+            {{ form.file }}
+        </p>
+        <p>
+            {{ form.submit(class="submit") }}
         </p>
     </form>
 {% endblock %}
