@@ -1,4 +1,42 @@
 {% extends "layout.html" %}
 {% block content %} 
-<h1>hello</h1>
+    <h1>Current Info:</h1>
+    <div>
+        <p>Profile Picture: <img src="{{image_file}}"></p>
+        <p>Email: {{current_user.email}}</p>
+        <p>Username: {{current_user.username}}</p>
+    </div>
+    <h1>Change Info:</h1>
+    <form class = "container" method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.username.label(class = "label") }}
+            {{ form.username(class="input") }}
+            {% if form.email.errors %}
+            <div>
+                {% for error in form.username.errors %}
+                    <span>{{error}}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </p>
+        <p>
+            {{ form.email.label(class = "label") }}
+            {{ form.email(class="input") }}
+            {% if form.email.errors %}
+            <div>
+                {% for error in form.email.errors %}
+                    <span>{{error}}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </p>
+        <p>
+            {{ form.pfp.label(class = "label") }}
+            {{ form.pfp(class="input") }}
+        </p>
+        <p>
+            {{ form.submit(class="submit") }}
+        </p>
+    </form>
 {% endblock %}

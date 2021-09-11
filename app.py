@@ -1,16 +1,19 @@
+from typing import Text
 from flask import Flask,render_template,url_for,redirect,flash, jsonify, request
 from flask_bcrypt import Bcrypt
 from flask_login import login_manager, login_user, current_user, logout_user, LoginManager, UserMixin
 from flask_login.mixins import UserMixin
 from flask_login.utils import login_required
 from wtforms.validators import Email
-from forms import RegistrationForm,LoginForm
+
 import os
 from werkzeug.utils import secure_filename
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired
 from werkzeug.datastructures import Headers
 from flask_sqlalchemy import SQLAlchemy, model
+import secrets
+from PIL import Image
 
 
 app = Flask(__name__)
@@ -22,10 +25,14 @@ login_manager = LoginManager(app)
 
 class User(db.Model,UserMixin):
     id = db.Column(db.Integer,primary_key = True)
-    username = db.Column(db.String(20),nullable = True)
-    email = db.Column(db.String(30),nullable = True)
+    username = db.Column(db.String(20),nullable = True,unique = True)
+    email = db.Column(db.String(30),nullable = True,unique = True)
     password = db.Column(db.String(20),nullable = True)
-    pfp = db.Column(db.String(100),nullable = False)
+    pfp = db.Column(db.String(100),nullable = False, default = 'default.png')
+
+from forms import RegistrationForm,LoginForm,UpdateAccountForm
+
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -53,14 +60,7 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         hash_password = bcrypt.generate_password_hash(form.password.data).decode("UTF-8")
-        # filename = form.file.name
-        # print(filename)
-        # form.file.data.save('\profile_pictures'+ filename)
-        # filename = secure_filename(form.file.data.filename)
-        # form.file.data.save('uploads/' + filename)
-        file = request.files['file']
-        file.save(secure_filename(file.filename))
-        user = User(username = form.username.data,email = form.email.data, password = hash_password,pfp = file)
+        user = User(username = form.username.data,email = form.email.data, password = hash_password)
         db.session.add(user)
         db.session.commit()
         flash(f"Account was created for user {form.username.data}","success") 
@@ -85,35 +85,50 @@ def logout():
     logout_user()
     return redirect(url_for("home"))
 
-@app.route("/account")
+
+
+
+def save_picture(picture):
+    randomhex = secrets.token_hex(8)
+    name, extension = os.path.splitext(picture.filename)
+    picture_filename = randomhex+extension
+    picture_path = os.path.join("static/pictures", picture_filename)
+    print(picture_path)
+    output_size = (150,150)
+    image = Image.open(picture)
+    image.thumbnail(output_size)
+    print(picture_path)
+    image.save(picture_path)
+    return picture_filename
+
+
+
+@app.route('/account', methods = ['get','POST'])
 @login_required
 def account():
-    if request.method == 'POST':
-        file = request.files['file']
-        file.save(secure_filename(file.filename))
-        return 'file uploaded successfully'
-    return render_template("modify_account.html")
-    
-
-@app.route('/upload')
-@login_required
-def file_upload():
-   return render_template('upload.html')
-	
-@app.route('/uploader', methods = ['GET', 'POST'])
-@login_required
-def download_file():
-    if request.method == 'POST':
-        file = request.files['file']
-        file.save(secure_filename(file.filename))
-        user = User(pfp = file.filename)
-        db.session.add(user)
+    form = UpdateAccountForm()
+    print(form.errors)
+    if form.validate_on_submit():
+        if form.pfp.data:
+            file = save_picture(form.pfp.data)
+            current_user.pfp = file
+        current_user.username = form.username.data
+        current_user.email = form.email.data
         db.session.commit()
-        return render_template("account.html")
+        return redirect(url_for('account'))
+
+    elif request.method == "get":
+        form.username.data = current_user.username
+        form.email = current_user.email 
+    image_file = url_for("static", filename = "pictures/"+ current_user.pfp)
+    flash(f"You have changed your account's data","success") 
+    return render_template("account.html",form = form, image_file = image_file)
+
     
 
 
 
 
 if __name__ == "__main__":
+    db.create_all()
     app.run(debug=True)

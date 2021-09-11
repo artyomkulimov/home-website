@@ -1,10 +1,11 @@
 {% extends "layout.html" %}
 {% block content %} 
 <div>Your current Username is: {{current_user.username}}</div>
-<div>Your current 
+<div>Your current profile picture is: do something like for the current username but get the name of the file from the database and the file itself from a folder called uploads</div>
 <form action = "http://localhost:5000/uploader" method = "POST" 
     enctype = "multipart/form-data">
     <input type = "file" name = "file" />
     <input type = "submit"/>
 </form>
+<div>all this does is upload the image and then crash because i need to modify 1 row and not create a new column</div>
 {% endblock %}

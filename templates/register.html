@@ -7,10 +7,24 @@
         <p>
             {{ form.username.label(class = "label") }}
             {{ form.username(class="input") }}
+            {% if form.username.errors %}
+            <div>
+                {% for error in form.username.errors %}
+                    <span>{{error}}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
         </p>
         <p>
             {{ form.email.label(class = "label") }}
             {{ form.email(class="input") }}
+            {% if form.email.errors %}
+            <div>
+                {% for error in form.email.errors %}
+                    <span>{{error}}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
         </p>
         <p>
             {{ form.password.label(class = "label") }}
@@ -19,10 +33,6 @@
         <p>
             {{ form.confirm_password.label(class = "label") }}
             {{ form.confirm_password(class="input") }}
-        </p>
-        <p>
-            {{ form.file.label(class = "label") }}
-            {{ form.file }}
         </p>
         <p>
             {{ form.submit(class="submit") }}
