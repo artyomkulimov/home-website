@@ -1,12 +1,9 @@
-from os import name
 from flask_wtf import FlaskForm
-from flask_wtf.recaptcha import validators
 from wtforms.fields.core import StringField
 from wtforms.fields.simple import PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, ValidationError
-from flask_wtf.file import FileAllowed, FileField,FileRequired
-from werkzeug.utils import secure_filename
-from __main__ import User
+from flask_wtf.file import FileAllowed, FileField
+from website.models import User
 
 class RegistrationForm(FlaskForm):
     username = StringField("Username:",validators = [DataRequired(),Length(min = 2,max=20)])
