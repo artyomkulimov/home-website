@@ -1,15 +1,16 @@
-<header>Website Blog</header>
+<link rel="stylesheet" href="{{url_for('static',filename = 'home.css')}}">
 {% extends "layout.html" %}
 {% block content %}
-    <h6></h6>
-        <h2>Navigation Menu</h2>
-        <div>
-            <a href="/home">Home</a>
-            <a href="/credits">Credits</a>
-            <a href="/form">Form</a>
-            <a href="/updates">Updates</a>
-        </div>
-    </ul>
-    <hr>
-    <img src="static/bitcoin.png" alt="image failed to load :(">
+<section class = "blog">
+    <div class = "container">
+        <h2>Welcome to my website</h2>
+        <h3>The things my website does:</h3>
+        <p>So, The first thing i decided on doing was adding a navigation bar, you can see it at the top of the screen
+        and it shows what pages you can go to, it is also dynamic, so when you are logged in, it replaces the login and register with account and logout.
+        another thing that this website does is when you register, it adds your data to a database, stored locally on my computer, you can also change 
+        those details in the account section once you are logged in, you can also add pfp and it will store them. furthermore, i also added the code 
+        for the website to github and i update it around twice a week, im still working on the site and with the addition of this text, i also want to 
+        code in a chat where people can talk to each other. the end goal of this project is making a api which tells you the price of any crypto you want,
+        but at the moment, ive got no idea of how to accomplish that, also, from now on, i will be posting updates here instead of the updates page.</p>
+    </div>
 {% endblock %}

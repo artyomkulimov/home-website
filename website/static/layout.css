@@ -1,63 +1,92 @@
-h1,h3, p {
-    margin: 20px;
-    color: rgb(26, 26, 26);
-    line-height: 1.75em;
-}
-.nav-horizontal {
-    text-align: center;
-    background-color: gray;
-    overflow: hidden;
-    height: 3em;
-    width: 100%;
-}
-.nav-horizontal .mask {
-    background-color: rgb(255, 255, 255);
-    height: 5em;
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    border-bottom: 20px;
-}
-.nav-horizontal .list {
-    display: inline-table;
-    margin: 0 auto;
-    max-width: 100%;
-}
-.nav-horizontal .list li {
-    display: table-cell;
-    margin: auto;
-}
-.nav-horizontal .list a {
-    display: block;
-    padding: 0 1em;
-    text-decoration: none;
-    background-color: gray;
-    color: rgb(255, 255, 255);
-    height: 3em;
-    line-height: 3;
-}
-.nav-horizontal .list a:hover {
-    border-bottom: 2px solid rgb(175, 175, 175);
-    background-color: rgb(41, 41, 41);
-}
-* {
-    box-sizing: border-box;
-}
-body{
-    font: normal, 20px, Verdana, Geneva, Tahoma, sans-serif;
-    margin: auto;
-    width: 60%;
-    border-right: 20px gray solid;
-    border-left: 20px gray solid;
-    border-top: 20px gray solid; 
-    border-bottom: 20px gray solid;
-    text-align: center;
-    font-family: sans-serif;
-    background-color: rgb(255, 255, 255);
-}
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
 .success{
     color: green;
+    position:absolute;
+    top:0;
+    left:0; 
+    height:100px;
+    width:400px;
 }
 .inv-cred{
     color: red;
+}
+
+body {
+	margin: 0;
+	background: #222;
+	font-family: 'Work Sans', sans-serif;
+	font-weight: 800;
+}
+
+.container {
+	width: 75%;
+	margin: 0 auto;
+}
+ 
+header {
+  background: #55d6aa;
+}
+
+header::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.logo {
+  float: left;
+  padding: 10px 0;
+}
+
+nav {
+  float: right;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 70px;
+  padding-top: 23px;
+
+  position: relative;
+}
+
+nav a {
+  color: #444;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  display: block;
+}
+
+nav a:hover {
+  color: #000;
+}
+
+nav a::before {
+  content: '';
+  display: block;
+  height: 5px;
+  background-color: #444;
+
+  position: absolute;
+  top: 0;
+  width: 0%;
+  transition: all ease-in-out 250ms;
+}
+
+nav a:hover::before {
+  width: 100%;
+}
+.github  {
+  color: inherit;
+}
+.button{
+  background: #55d6aa;
+  padding: 1em 2em;
 }

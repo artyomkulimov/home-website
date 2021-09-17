@@ -1,13 +1,16 @@
+<link rel="stylesheet" href="{{url_for('static',filename = 'account.css')}}">
 {% extends "layout.html" %}
 {% block content %} 
-    <h1>Current Info:</h1>
-    <div>
+<section class="info">
+    <div class = "container">
+        <h1>Current Info:</h1>
         <p>Profile Picture: <img src="{{image_file}}"></p>
-        <p>Email: {{current_user.email}}</p>
+        <p>Email: {{current_user.email}}</p> 
         <p>Username: {{current_user.username}}</p>
     </div>
-    <h1>Change Info:</h1>
     <form class = "container" method="POST" action="" enctype="multipart/form-data">
+        <h1>Change Info:</h1>
+        <h6>PS; if you dont want to change username/email, input the same value as you have currently.</h6>
         {{ form.hidden_tag() }}
         <p>
             {{ form.username.label(class = "label") }}
@@ -35,8 +38,10 @@
             {{ form.pfp.label(class = "label") }}
             {{ form.pfp(class="input") }}
         </p>
-        <p>
+        <p class="btn">
             {{ form.submit(class="submit") }}
         </p>
     </form>
+    <br>
+</section>
 {% endblock %}

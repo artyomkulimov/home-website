@@ -15,22 +15,32 @@
     {% if header %}
         <header>{{header}}</header>
     {% endif %}
-    <nav class="nav-horizontal">
-        <div class="mask">
-          <ul class="list">
-            <li><a href="{{url_for('home')}}">Home</a></li>
-            <li><a href="{{url_for('credits')}}">Credits</a></li>
-            <li><a href="{{url_for('updates')}}">Updates</a></li>
-            {% if current_user.is_authenticated %}
-                <li><a href="{{url_for('account')}}">Account</a></li>
-                <li><a href="{{url_for('logout')}}">Logout</a></li>
+    <header>
+        <div class="container">
+            {% if header %}
+                <h1 class="logo">{{header}}</h1>
             {% else %}
-                <li><a href="{{url_for('register')}}">Register</a></li>
-                <li><a href="{{url_for('login')}}">Login</a></li>
+                <h1 class="logo">set my header in the routes</h1>
             {% endif %}
-          </ul>
+            <h6><a class="github" href="https://github.com/artyomkulimov/home-website">click here!</a></h6>
+            <nav>
+            <ul>
+
+                {% if current_user.is_authenticated %}
+                    <li class="button"><a href="{{url_for('home')}}">Home</a></li>
+                    <li class="button"><a href="{{url_for('account')}}">Account</a></li>
+                    <li class="button"><a href="{{url_for('logout')}}">Logout</a></li>
+                    <li class="button"><a href="{{url_for('credits')}}">Credits</a></li>
+                {% else %}
+                    <li class="button"><a href="{{url_for('home')}}">Home</a></li>
+                    <li class="button"><a href="{{url_for('register')}}">Register</a></li>
+                    <li class="button"><a href="{{url_for('login')}}">Login</a></li>
+                    <li class="button"><a href="{{url_for('credits')}}">Credits</a></li>
+                {% endif %}
+            </ul>
+            </nav>
         </div>
-    </nav>
+    </header>
     {% with messages = get_flashed_messages(with_categories = true) %}
         {% if messages %}
             {% for category,message in messages %}

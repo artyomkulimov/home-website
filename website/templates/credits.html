@@ -1,6 +1,11 @@
-
+<link rel="stylesheet" href="{{url_for('static',filename = 'home.css')}}">
 {% extends "layout.html" %}
-{% block content %} 
-    <hr>
-    <h3><a href="https://github.com/artyomkulimov/home-website">this is the github page of this code</a></h3> <br>
+{% block content %}
+<section class = "blog">
+    <div class = "container">
+        <h2>This is the Credits page.</h2>
+        <p>
+            This is the github page where i update my code once a week, you can find it <a class="github" href="https://github.com/artyomkulimov/home-website">here</a>
+        </p>
+    </div>
 {% endblock %}

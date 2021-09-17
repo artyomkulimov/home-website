@@ -1,7 +1,7 @@
-<link rel="stylesheet" href="{{url_for('static',filename = 'register.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename = 'login.css')}}">
 {% extends "layout.html" %}
 {% block content %}
-
+<section class = "login">
     <form class = "container" method="POST" action="">
         {{ form.csrf_token }}
         <p>
@@ -23,4 +23,6 @@
             {{form.submit(class="submit")}}
         </p>
     </form>
+    <br>
+</section>
 {% endblock %}

@@ -12,15 +12,11 @@ import os
 @app.route("/home")
 @app.route("/")
 def home():
-    return render_template("home.html",title = "Home",Header = "<h1>Website Blog</h1>")
+    return render_template("home.html",title = "Home",Header = "home page")
 
 @app.route("/credits")
 def credits():
     return render_template("credits.html",title = "Credits",Header = "This is the credits page")
-
-@app.route("/form")
-def form():
-    return render_template("form.html",title = "Form")
 
 @app.route("/updates")
 def updates():
@@ -54,6 +50,7 @@ def login():
 @app.route("/logout")
 def logout():
     logout_user()
+    flash(f"You have logged out of your account.","success") 
     return redirect(url_for("home"))
 
 def save_picture(picture):
@@ -83,11 +80,11 @@ def account():
         current_user.username = form.username.data
         current_user.email = form.email.data
         db.session.commit()
+        flash(f"You have changed your account's data","success") 
         return redirect(url_for('account'))
 
     elif request.method == "get":
         form.username.data = current_user.username
         form.email = current_user.email 
     image_file = url_for("static", filename = "pictures/"+ current_user.pfp)
-    flash(f"You have changed your account's data","success") 
     return render_template("account.html",form = form, image_file = image_file)
