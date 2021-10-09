@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="{{url_for('static',filename = 'home.css')}}">
+{% extends "layout.html" %}
+{% block content %}
+<div style="height: 25px;"></div>
+<section class = "blog">
+        {% if post.author.username == current_user.username %}
+            <div class = "del">
+                 <form class = "container" method="POST" action="{{url_for('delete',post_id = post.id)}}">
+                    <p class="btn">
+                        <input type="submit" value = "Delete">
+                    </p>
+                </form>
+            </div>
+            <div class = "upd">
+                <p class = "btn">
+                    <a href="{{url_for('update', post_id = post.id)}}">Update</a>
+                </p>
+            </div>
+        {% endif %}
+        <div class = "container">
+            <img src="{{url_for('static', filename = 'pictures/' + post.author.pfp)}}" alt="">
+            <h2>{{post.title}}</h2>
+            <h3>{{post.date_posted.strftime("%Y-%m-%d")}}</h3>
+            <p>{{post.content}}</p>
+            <h4>{{post.author.username}}</h4>
+            <h6>{{post.id}}</h6>
+        </div>
+        <div style="height: 25px; background-color: #222"></div>
+</section>
+{% endblock %}

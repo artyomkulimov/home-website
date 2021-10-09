@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="{{url_for('static',filename = 'login.css')}}">
+{% extends "layout.html" %}
+{% block content %}
+<section class = "login">
+    <form class = "container" method="POST" action="">
+        {{ form.csrf_token }}
+        <p>
+            {{form.title.label(class = "label")}} <br>
+            {{form.title(class="input")}}
+            {% if form.title.errors %}
+            <div>
+                {% for error in form.title.errors %}
+                    <span>{{error}}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </p>
+        <p>
+            {{form.content.label(class = "label")}}<br>
+            {{form.content(class="input")}}
+            {% if form.content.errors %}
+            <div>
+                {% for error in form.content.errors %}
+                    <span>{{error}}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </p>
+        <p>
+            {{form.submit(class="submit")}}
+        </p>
+    </form>
+    <br>
+</section>
+{% endblock %}

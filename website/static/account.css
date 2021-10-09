@@ -11,11 +11,11 @@ p{
     margin:0 auto;
     
 }
-.info{
+/* .info{
     background-color:rgb(106, 204, 196);
-}
+} */
 .submit{
-    background: #55d6aa;
+    /* background: #55d6aa; */
     padding: 1em 4em;
     text-decoration: none;
     outline: none;

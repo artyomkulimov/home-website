@@ -1,9 +1,11 @@
 from flask_login import login_user, current_user, logout_user
 from flask_login.utils import login_required
 from flask import render_template,url_for,redirect,flash, request
-from website import app, db, bcrypt
-from website.models import User
-from website.forms import RegistrationForm,LoginForm,UpdateAccountForm
+from wtforms.validators import Email
+from flask_mail import Message
+from website import app, db, bcrypt, mail
+from website.models import User, Post
+from website.forms import RegistrationForm,LoginForm,UpdateAccountForm,PostForm, RequestResetForm
 from PIL import Image
 import secrets
 import os
@@ -12,15 +14,12 @@ import os
 @app.route("/home")
 @app.route("/")
 def home():
-    return render_template("home.html",title = "Home",Header = "home page")
+    posts = Post.query.all()
+    return render_template("home.html",title = "Home",Header = "Home Page", posts = posts)
 
 @app.route("/credits")
 def credits():
-    return render_template("credits.html",title = "Credits",Header = "This is the credits page")
-
-@app.route("/updates")
-def updates():
-    return render_template("updates.html",title = "Updates",Header = "This is where I document updates to my github page.")
+    return render_template("credits.html",title = "Credits",Header = "Credits Page")
 
 @app.route("/register",methods = ["GET","POST"])
 def register():
@@ -32,7 +31,7 @@ def register():
         db.session.commit()
         flash(f"Account was created for user {form.username.data}","success") 
         return redirect(url_for("home"))
-    return render_template("register.html",form = form,title = "Register",Header = "This is the registration Form")
+    return render_template("register.html",form = form,title = "Register",Header = "Register")
 
 @app.route("/login",methods = ["GET","POST"])
 def login():
@@ -45,7 +44,7 @@ def login():
             return redirect(url_for("home"))
         else:
             flash(f"Either username or password incorrect","inv-cred")
-    return render_template("login.html",form = form,title = "Login",Header = "This is the Login page")
+    return render_template("login.html",form = form,title = "Login",Header = "Login")
 
 @app.route("/logout")
 def logout():
@@ -68,7 +67,7 @@ def save_picture(picture):
 
 
 
-@app.route('/account', methods = ['get','POST'])
+@app.route('/account', methods = ['GET','POST'])
 @login_required
 def account():
     form = UpdateAccountForm()
@@ -87,4 +86,84 @@ def account():
         form.username.data = current_user.username
         form.email = current_user.email 
     image_file = url_for("static", filename = "pictures/"+ current_user.pfp)
-    return render_template("account.html",form = form, image_file = image_file)
+    return render_template("account.html",form = form, image_file = image_file, Header = "Account")
+
+@app.route('/post/new', methods = ['GET','POST'])
+@login_required
+def new_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title = form.title.data, content = form.content.data, user_id = current_user.id)
+        db.session.add(post)
+        db.session.commit()
+        flash(f"Your has been created","success") 
+        return redirect(url_for("home")) 
+    return render_template("create_post.html", title = "Posts", form = form, header = "User posts")
+
+
+@app.route("/post/<int:post_id>")
+def view_post(post_id):
+    post = Post.query.get(post_id)
+    return render_template("post.html", title = "Posts", header = "User posts", post = post)
+
+@app.route("/post/<int:post_id>/delete", methods = ['POST'])
+@login_required
+def delete(post_id):    
+    post = Post.query.get(post_id)
+    if current_user.username == post.author.username:
+        db.session.delete(post)
+        db.session.commit()
+        flash(f"Your post has been deleted","success") 
+        return redirect(url_for("home")) 
+
+@app.route("/post/<int:post_id>/update", methods = ['GET','POST'])
+@login_required
+def update(post_id):    
+    post = Post.query.get(post_id)
+    form = PostForm()
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.content = form.content.data
+        db.session.commit()
+        flash(f"Your post has been edited","success") 
+        return redirect(url_for("view_post", post_id = post_id)) 
+    if request.method == 'GET':
+        form.title.data = post.title
+        form.content.data = post.content
+    return render_template("create_post.html", title = "Update Posts",header = "Update Posts", form = form)
+
+
+
+@app.route("/user/<string:username>", methods = ['GET','POST'])
+def users(username):
+    user = User.query.filter_by(username = username).first()
+    posts = Post.query.filter_by(author = user)
+    return render_template("user_post.html", title = "Update Posts",header = "Update Posts", posts = posts)
+
+
+
+
+def send_reset_email(user):
+    token = user.get_reset_token() 
+    message = Message("Password Reset Request", sender = "artyomkulimov2@gmail.com", recipients = [user.email])
+    message.body = f"To reset your password, click this link: {url_for('reset_request', token = token, _external  = True)}"
+    mail.send(message)
+
+
+@app.route("/reset_password", methods = ['GET','POST'])
+def reset_request():
+    if current_user.is_authenticated:
+        return redirect(url_for("home")) 
+    form = RequestResetForm()
+    login_form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email = form.email.data).first()
+        send_reset_email(user)
+        flash(f"check your mail for a link!","success") 
+        return render_template("login.html",form = login_form)
+    return render_template("reset_request.html", form = form) # make html
+
+
+# @app.route("/testing")
+# def tesitng():
+#     return render_template("trylayout.html",title = "Credits",Header = "Credits Page")

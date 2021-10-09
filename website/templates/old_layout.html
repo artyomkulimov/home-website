@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'layout.css')}}">
+    {% if title %}
+        <title>{{title}}</title>
+    {% else %}
+        <title>Web Blog</title>
+    {% endif %}
+</head>
+<body>
+    <header>
+        <div class="container">
+            {% if header %}
+                <h1 class="logo">{{ header }}</h1>
+            {% else %}
+                <h1 class="logo">set my header in the routes</h1>
+            {% endif %}
+            <h6><a class="github" href="https://github.com/artyomkulimov/home-website">click here!</a></h6>
+            <nav>
+            <ul>
+                <li class="button"><a href="{{url_for('home')}}">Home</a></li>
+                {% if current_user.is_authenticated %}
+                    <li class="button"><a href="{{url_for('new_post')}}">New Post</a></li>
+                    <li class="button"><a href="{{url_for('account')}}">Account</a></li>
+                    <li class="button"><a href="{{url_for('logout')}}">Logout</a></li>
+                {% else %}
+                    <li class="button"><a href="{{url_for('register')}}">Register</a></li>
+                    <li class="button"><a href="{{url_for('login')}}">Login</a></li>
+                {% endif %}
+                <li class="button"><a href="{{url_for('credits')}}">Credits</a></li>
+            </ul>
+            </nav>
+        </div>
+    </header>
+    {% with messages = get_flashed_messages(with_categories = true) %}
+        {% if messages %}
+            {% for category,message in messages %}
+                <div class = {{category}}>{{message}}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

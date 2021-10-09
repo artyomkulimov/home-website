@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="{{url_for('static',filename = 'account.css')}}">
+{% extends "layout.html" %}
+{% block content %}
+<section class = "form-form">
+    <form class = "container" method="POST" action="">
+        {{ form.csrf_token }}
+        <p>
+            {{form.email.label(class = "label")}}<br>
+            {{form.email(class="input")}}
+        </p>
+        <p>
+            {{form.submit(class="submit")}}
+        </p>
+    </form>
+    <br>
+</section>
+{% endblock %}

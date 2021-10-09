@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="{{url_for('static',filename = 'home.css')}}">
+{% extends "layout.html" %}
+{% block content %}
+<br>
+<section class = "blog">
+    {% for post in posts %}
+        <div class = "container">
+            <a href="post/{{post.id}}"><img src="{{url_for('static', filename = 'pictures/' + post.author.pfp)}}" alt=""></a>
+            <h2>{{post.title}}</h2>
+            <h3>{{post.date_posted.strftime("%Y-%m-%d")}}</h3>
+            <p>{{post.content}}</p>
+            <h4>{{post.author.username}}</h4>
+            <h6>{{post.id}}</h6>
+        </div>
+        <div style="height: 25px; background-color: #222"></div>
+    {% endfor %}
+</section>
+{% endblock %}

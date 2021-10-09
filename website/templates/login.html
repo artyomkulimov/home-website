@@ -1,7 +1,7 @@
-<link rel="stylesheet" href="{{url_for('static',filename = 'login.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename = 'account.css')}}">
 {% extends "layout.html" %}
 {% block content %}
-<section class = "login">
+<section class = "form-form">
     <form class = "container" method="POST" action="">
         {{ form.csrf_token }}
         <p>
@@ -21,6 +21,9 @@
         </p>
         <p>
             {{form.submit(class="submit")}}
+        </p>
+        <p>
+            <a href="{{url_for('reset_request')}}">Forgot your password?</a>
         </p>
     </form>
     <br>

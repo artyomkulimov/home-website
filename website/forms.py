@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms.fields.core import StringField
-from wtforms.fields.simple import PasswordField, SubmitField
+from wtforms.fields.simple import PasswordField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, ValidationError
 from flask_wtf.file import FileAllowed, FileField
 from website.models import User
@@ -39,3 +39,13 @@ class UpdateAccountForm(FlaskForm):
         user = User.query.filter_by(email = email.data).first()
         if user:
             raise ValidationError(message="The email is already in use")
+
+class PostForm(FlaskForm):
+    title = StringField("Title", validators=[DataRequired()])
+    content = TextAreaField("Content", validators=[DataRequired()])
+    submit = SubmitField("Post")
+
+
+class RequestResetForm(FlaskForm):
+    email = StringField("Email:",validators=[Email(),DataRequired()])
+    submit = SubmitField("Post")
